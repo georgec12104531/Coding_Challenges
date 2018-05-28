@@ -18,3 +18,4 @@ def list_squared(m, n)
 	end
 	final_array
 end
+
