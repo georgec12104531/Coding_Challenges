@@ -1,0 +1,6 @@
+def solutions(n)
+	n.reduce(:gcd) * n.size
+end	
+
+
+solutions([2, 4, 6])
