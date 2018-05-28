@@ -1,0 +1,20 @@
+#first round
+
+def factors_square_sum(n)
+	(1..n).select { |num| n % num == 0 }
+	.map {|num| num ** 2}
+	.reduce(:+)
+end
+
+def perfect_square(n)
+	(1..n).each { |num| return num if num ** 2 == n } 
+	return false 
+end
+
+def list_squared(m, n)
+	final_array = []
+	(m..n).each do |num|
+		final_array << [num, factors_square_sum(num)] if perfect_square(factors_square_sum(num)) != false 
+	end
+	final_array
+end
