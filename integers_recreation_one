@@ -33,4 +33,14 @@ def list_squared(m, n)
   end.compact
 end
 
+final_round
+
+def listed_square(m, n)
+	(m..n).map do |num|
+		divisors = (1..num).select { |n| num % n == 0 }
+		div_sq = divisors.map { |n| n * n }.reduce(:+)
+		[num, div_sq] if Math.sqrt(div_sq) % 1 == 0 
+	end.compact
+end
+
 
