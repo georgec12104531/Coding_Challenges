@@ -1,0 +1,17 @@
+#currently disecting 
+
+def listPosition(word)
+    return 1 if word.length == 1
+    
+    p sorted = word.chars.sort
+    
+    p i = sorted.index(word[0])
+	
+    p j = sorted.length - 1
+    k = sorted.uniq.inject(1) do |a, e| 
+			p sorted.count(e)
+			p total = a * sorted.count(e).downto(1).reduce(:*)
+		end
+
+    # (i) * (j.downto(1).inject(:*))/(k) + listPosition(word[1..-1])
+end
