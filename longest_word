@@ -1,0 +1,10 @@
+def LongestWord(sen)
+  sen = sen.split(" ")
+  longest_word = sen[0].length
+  sen.each do |el|
+      if el.length > longest_word
+          el == longest_word
+      end
+  end
+  longest_word
+end
