@@ -1,0 +1,4 @@
+def LetterChanges(str)
+  str = str.reverse
+  return str 
+end
