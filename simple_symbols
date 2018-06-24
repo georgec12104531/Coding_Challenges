@@ -1,0 +1,14 @@
+def SimpleSymbols(str)
+    alphabet = ("a".."z").to_a
+    count = 0 
+    (0..str.length-2).each do |i|
+        if alphabet.include?(str[i]) 
+        	if str[i - 1] == "+" and str[i + 1] == "+"
+        		count += 0 
+        	else 
+        		return false 
+        	end
+        end
+    end
+    return true 
+end
