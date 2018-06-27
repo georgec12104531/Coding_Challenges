@@ -1,0 +1,3 @@
+def AlphabetSoup(str)
+    str = str.chars.sort.join("")
+end
