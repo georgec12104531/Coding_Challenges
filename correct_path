@@ -1,0 +1,31 @@
+def CorrectPath(str)
+	options = ["d", "u", "r", "l"]
+	while true
+		test_str = str.dup 
+		(0..test_str.length-1).each do |i|
+			if test_str[i] == "?"
+				random = options[rand(options.length)]
+				test_str[i] = random
+			end
+		end
+		return test_str if Check_path(test_str)
+	end
+end
+
+def Check_path(str)
+	counter = [0, 0]
+	(0..str.length-1).each do |i|
+		if str[i] == "d"
+			counter[0] += 1
+		elsif str[i] == "u"
+			counter[0] -= 1
+		elsif str[i] == "r"
+			counter[1] += 1
+		elsif str[i] == "l"
+			counter[1] -= 1 
+		end
+		return false if counter[0] < 0 || counter[0] > 4 || counter[1] < 0 || counter[1] > 4
+	end
+	return false if counter != [4,4]
+	return true
+end
