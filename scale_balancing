@@ -1,0 +1,16 @@
+def ScaleBalancing(strArr)
+	balance = JSON.parse(strArr[0])
+	weights = JSON.parse(strArr[1])
+	diff = (balance[0].to_i - balance[1].to_i).abs
+	
+	return diff.to_s if weights.include?(diff)
+	
+	(0..weights.length-1).each do |i|
+		(i+1..weights.length-1).each do |j|
+			if weights[i] + weights[j] == diff or (weights[i] - weights[j]).abs == diff
+				return weights[i].to_s + "," + weights[j].to_s 
+			end
+		end
+	end
+	return "not possible"
+end
