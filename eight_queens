@@ -1,0 +1,14 @@
+def EightQueens(strArr)
+    positions = strArr.map { |pos_str| pos_str.scan(/\d/).map(&:to_i) }
+    (0...positions.length).each do |idx|
+        current_queen = positions[idx]
+        other_queens = positions[0...idx] + positions[idx.next..-1]
+        if other_queens.any? { |queen| queen[0] == current_queen[0] } ||
+          other_queens.any? { |queen| queen[1] == current_queen[1] } ||
+          other_queens.any? { |queen| (current_queen[1] - queen[1]).abs == (current_queen[0] - queen[0]).abs }
+            return "(#{current_queen[0]},#{current_queen[1]})"
+        end
+    end
+    return true
+end
+   
