@@ -1,0 +1,11 @@
+def VowelSquare(strArr)
+	vowels = "aeiou"
+	strArr.each_with_index do |string, idx1|
+		next_array = strArr[idx1 + 1]
+		string[0..-2].each_char.with_index do |letter, idx2|
+			next_num = idx2 + 1
+			return "#{idx1}-#{idx2}" if vowels.include?(string[idx2]) and vowels.include?(string[next_num]) and vowels.include?(next_array[idx2]) and vowels.include?(next_array[next_num]) 
+		end
+	end
+  return "not found" 
+end
