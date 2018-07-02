@@ -1,0 +1,13 @@
+def RectangleArea(strArr)
+  x_array, y_array = [], []
+  strArr.map! do |el|
+	  el = el.tr("()", "").split(" ").map(&:to_i)
+  end
+  (0..strArr.length-1).each do |i|
+    x_array << strArr[i][0]
+    y_array << strArr[i][1]
+  end
+  x_difference  =  (x_array.uniq[0] - x_array.uniq[1]).abs
+  y_difference = (y_array.uniq[0] - y_array.uniq[1]).abs
+  area = x_difference * y_difference
+end
