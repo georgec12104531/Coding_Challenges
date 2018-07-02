@@ -1,0 +1,11 @@
+def ArithGeo(arr)
+   geo_difference = arr[1] / arr[0]
+   arith_difference = arr[1] - arr[0]
+   return "Arithmetic" if (1..arr.length-1).all? do |i|
+        arr[i] - arr[i-1] == arith_difference
+   end
+   return "Geometric" if (1..arr.length-1).all? do |i|
+       arr[i] / arr[i-1] == geo_difference
+   end
+   return -1
+end
