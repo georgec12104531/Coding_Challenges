@@ -1,0 +1,12 @@
+def QuestionsMarks(str)
+	result_array = []
+	str_num = str.scan(/\d+/)
+	index_array = []
+	(0..str.length-1).each {|i| index_array << i if str_num.include?(str[i])}
+	(0..index_array.length-2).each do |i|
+	  str[index_array[i]].to_i + str[index_array[i+1]].to_i == 10 and str[index_array[i].to_i..index_array[i+1].to_i].count("?") == 3 ? result_array << "0" : result_array << "1"
+	end
+	result_array
+	return "false" if result_array.empty?
+	result_array.all? {|el| el == "0"} ? "true" : "false"
+end
