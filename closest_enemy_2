@@ -1,0 +1,20 @@
+def ClosestEnemyII(strArr)
+	str_length = strArr[0].length 
+	min_distance = str_length 
+	one_coordinates, two_coordinates = [], []
+	strArr.each_with_index do |row, i|
+		row.each_char.with_index do |num, j|
+			one_coordinates << [i, j] if num == "1"
+			two_coordinates << [i, j] if num == "2"
+		end
+	end
+	return "0" if one_coordinates.length > 1 or two_coordinates.length == 0 
+	two_coordinates.each do |i|
+		h = [(str_length - (i[0] - one_coordinates[0][0]).abs), (i[0] - one_coordinates[0][0]).abs].min
+		v = [strArr.length - (i[1] - one_coordinates[0][1]).abs, (i[1] - one_coordinates[0][1]).abs].min
+		if h + v < min_distance
+			min_distance = h + v 
+		end
+	end
+	min_distance
+end
