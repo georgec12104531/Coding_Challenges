@@ -1,0 +1,16 @@
+# Define a method, #e_words(str), that accepts a string as an argument. Your method return the number of words in the string that end with the letter "e".
+# e_words("tree") => 1
+# e_words("Let be be finale of seem.") => 3
+
+def e_words(str)
+  count = 0
+  i = 0
+  str = str.split(" ")
+  while i < str.length
+    if str[i][-1] == "e"
+      count += 1
+    end
+    i += 1
+  end
+  count
+end
