@@ -1,0 +1,16 @@
+def is_slippery?(n)
+  return true if (n % 3 == 0) ^ (n % 5 ==0)
+  return false
+end
+
+def slippery_numbers(n)
+  arr = []
+  i = 3
+  while arr.length < n
+    if  is_slippery?(i)
+      arr << i
+    end
+  i += 1
+  end
+  arr 
+end
