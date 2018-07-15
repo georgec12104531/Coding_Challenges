@@ -1,0 +1,19 @@
+
+
+# Identify This
+# ----------------------------------------
+# Define a method, #identify_this(obj), that accepts any object as an argument!
+# Your method should return a string that identifies the type of object in the
+# following format:
+#   "This ruby object is a _______!"
+# Hint, use the #class method to identify objects. Test this method in the repl!
+
+def identify_this_1(obj)
+  type = obj.class
+  "This ruby object is a #{type}!"
+end
+
+def identify_this_2(obj)
+  type = obj.class
+  "This ruby object is a " + type.to_s + "!"
+end
