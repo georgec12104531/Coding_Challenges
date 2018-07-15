@@ -1,0 +1,12 @@
+# Largest Factor
+# ----------------------------------------
+# Write a method, #largest_factor, that accepts an integer as an argument and returns
+# the largest factor of that integer
+
+def largest_factor(n)
+  possible_factor = n - 1
+  while possible_factor > 0
+    return possible_factor if n % possible_factor == 0
+    possible_factor -= 1
+  end
+end
