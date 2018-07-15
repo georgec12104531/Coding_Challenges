@@ -1,0 +1,3 @@
+def pizza_slices(circumference, crust_length)
+  (circumference.to_f / crust_length).round(3)
+end
