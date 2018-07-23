@@ -1,0 +1,15 @@
+def num_prime_factors(num)
+  factors(num).count { |el| prime?(el) }
+end
+
+def factors(num)
+  factors = []
+  (1..num).each do |number| 
+    factors << number if num % number == 0 
+  end
+  factors
+end
+
+def prime?(num)
+  factors(num).count == 2 
+end
