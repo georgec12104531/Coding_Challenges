@@ -1,4 +1,27 @@
+Using the Ruby language, have the function LetterChanges(str) take the str parameter 
+being passed and modify it using the following algorithm. Replace every letter in the 
+string with the letter following it in the alphabet (ie. c becomes d, z becomes a). Then 
+capitalize every vowel in this new string (a, e, i, o, u) and finally return this modified string. 
+
+Sample Test Cases
+Input:"hello*3"
+Output:"Ifmmp*3"
+
+Input:"fun times!"
+Output:"gvO Ujnft!"
+
 def LetterChanges(str)
-  str = str.reverse
-  return str 
+    vowels = "aeiouAEIOU"
+    alphabet = ("a".."z").to_a
+    (0...str.length).each do |i|
+        current_letter = str[i]
+        next_index = (i + 1) % 25 
+        next_letter = str[next_index]
+        if vowels.include?(next_letter)
+            current_letter = next_letter.upcase
+        elsif alphabet.include?(current_letter)
+            current_letter = next_letter
+        end
+    end
+    str
 end
