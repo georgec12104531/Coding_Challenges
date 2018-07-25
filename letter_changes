@@ -25,3 +25,47 @@ def LetterChanges(str)
     end
     str
 end
+
+1. Specs 
+
+2. Consider the process 
+
+3. In Plain English 
+  1. Create alphabet array 
+  2. Create final variabe and map through string 
+  3. If alphabet.include?(letter), the index over by one, use modulo
+  4. If the character is included in "aeiou", upcase
+  5. Else, proceed with existing character
+  6. return array and join
+4. Translate to code
+
+def LettersChange(str)
+  alphabet = ("a".."z").to_a
+  modified_str = str.each_char.map do |letter|
+    if alphabet.include? letter 
+      current_index = alphabet.index(letter)
+      modified_letter = alphabet[current_index.next % 26]
+      modified_letter =~ /[aeiou]/ ? modified_letter.upcase : modified_letter
+    else 
+      letter
+    end
+  end
+  modified_str.join("")
+end
+
+def LettersChange(str)
+  
+  str = str.gsub(/[a-zA-Z]/) do |letter|
+    if letter == "z" or letter == "Z"
+      "a"
+    else 
+      (letter.ord + 1).chr
+    end
+  end 
+  str.tr("aeiou", "AEIOU")
+end
+
+LettersChange("helloz")
+
+
+
