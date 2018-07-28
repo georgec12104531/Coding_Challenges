@@ -1,0 +1,18 @@
+Have the function DivisionStringified(num1,num2) take both 
+parameters being passed, divide num1 by num2, and return the 
+result as a string with properly formatted commas. If an answer 
+is only 3 digits long, return the number with no commas 
+(ie. 2 / 3 should output "1"). For example: if num1 is 123456789 
+and num2 is 10000 the output should be "12,346". 
+
+def DivisionStringified(num1,num2)
+    final_array = []
+    product = (num1.to_f / num2.to_f).round.to_s
+    return product if product.length < 4
+    product.chars.reverse_each.with_index do |el, idx|
+        index = idx + 1 
+        final_array << el
+        final_array << "," if index % 3 == 0 and index < product.length
+    end
+    final_array.reverse
+end
