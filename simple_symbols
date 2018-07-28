@@ -12,3 +12,16 @@ def SimpleSymbols(str)
     end
     return true 
 end
+
+#updated
+
+def SimpleSymbols(str)
+  str = "=" + str + "="
+  (1..str.length-2).each do |i|
+    current_letter = str[i]
+    if /[a-zA-Z]/.match(current_letter)
+      return false if str[i - 1] != "+" or str[i + 1] != "+"
+    end
+  end
+  return true     
+end
