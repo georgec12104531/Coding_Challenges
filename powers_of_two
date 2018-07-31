@@ -1,0 +1,10 @@
+# Input: Integer
+# Output: "true" or "false"
+
+def PowersofTwo(num)
+    until num == 2 
+        num /= 2 
+        return "false" if num.odd?
+    end
+    return "true"
+end
