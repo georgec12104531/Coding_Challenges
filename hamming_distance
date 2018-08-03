@@ -1,0 +1,14 @@
+# Input: = strArr
+# Output: Integer (count)
+
+# - Declare both string 
+# - Iterate through one of the strings (0..string.length-1).count do |i|
+# - string[i] == string2[i]
+
+
+def HammingDistance(strArr)
+    string1, string2 = strArr[0], strArr[1]
+    (0..string1.length-1).count do |i|
+        string1[i] != string2[i]
+    end
+end
