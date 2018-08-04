@@ -1,0 +1,17 @@
+Have the function NextPalindrome(num) take the num parameter 
+being passed and return the next largest palindromic number. 
+The input can be any positive integer. For example: if num is 24, 
+then your program should return 33 because that is the next 
+largest number that is a palindrome. 
+
+def NextPalindrome(num)
+	num += 1 
+	until Pal?(num)
+		num += 1 
+	end
+	return num 
+end
+
+def Pal?(num)
+	num.to_s == num.to_s.reverse
+end
