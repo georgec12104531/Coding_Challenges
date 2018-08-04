@@ -1,0 +1,16 @@
+Have the function LargestPair(num) take the num parameter 
+being passed and determine the largest double digit number 
+within the whole number. For example: if num is 4759472 then 
+your program should return 94 because that is the largest 
+double digit number. The input will always contain at least 
+two positive digits. 
+
+def LargestPair(num)
+	num = num.to_s
+	final_array = (0..num.length-2).map do |i|
+		num[i] + num[i+1]
+	end
+	largest_num = final_array.max_by {|num| num.to_i }
+	largest_num.to_i
+end
+   
