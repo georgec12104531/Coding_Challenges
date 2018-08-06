@@ -1,0 +1,32 @@
+Have the function ThreeNumbers(str) take the str parameter 
+being passed and determine if exactly three unique, 
+single-digit integers occur within each word in the string. 
+The integers can appear anywhere in the word, but they 
+cannot be all adjacent to each other. If every word contains 
+exactly 3 unique integers somewhere within it, then return 
+the string true, otherwise return the string false. For 
+example: if str is "2hell6o3 wor6l7d2" then your program 
+should return "true" but if the string is "hell268o w6or2l4d" 
+then your program should return "false" because all the integers 
+are adjacent to each other in the first word. Use the Parameter 
+Testing feature in the box below to test your code with different 
+arguments.
+
+def ThreeNumbers(str)
+	str = str.split(" ")
+	str.each.all? {|str| three_uniq(str)}
+end
+
+   
+def three_uniq(str)
+	double_digits = str.scan(/\d+/)
+	single_digits = str.scan(/\d/)
+	
+	if single_digits.uniq.length == 3
+		double_digits.each do |el|
+			return false if el.length > 2
+		end
+		return true
+	end
+	return false
+end
