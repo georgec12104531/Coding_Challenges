@@ -1,0 +1,42 @@
+Have the function PalindromeCreator(str) take the str 
+parameter being passed and determine if it is possible 
+to create a palindromic string of at least 3 characters 
+by removing 1 or 2 characters. For example: if str is 
+"abjchba" then you can remove the characters jc to produce 
+"abhba" which is a palindrome. For this example your 
+program should return the two characters that were 
+removed with no delimiter and in the order they appear 
+in the string, so jc. If 1 or 2 characters cannot be 
+removed to produce a palindrome, then return the string 
+not possible. If the input string is already a palindrome, 
+your program should return the string palindrome. 
+
+The input will only contain lowercase alphabetic characters. 
+Your program should always attempt to create the longest 
+palindromic substring by removing 1 or 2 characters 
+(see second sample test case as an example). The 2 
+characters you remove do not have to be adjacent 
+in the string. 
+
+def PalindromeCreator(str)
+	new_hash = Hash.new
+	return "palindrome" if str.reverse == str
+	without_one, without_two = str.length-1, str.length-2
+	array_without_one, array_without_two = str.chars.combination(without_one).to_a, str.chars.combination(without_two).to_a
+	array_without_one.each do |combo|
+		new_hash[combo.join("")] = combo.join("").length if combo == combo.reverse
+	end
+	array_without_two.each do |combo|
+		new_hash[combo.join("")] = combo.join("").length if combo == combo.reverse
+	end
+	largest_value = new_hash.values.max_by {|v| v}
+	longest_palindrome = new_hash.select {|k,v| v == largest_value}
+	longest_palindrome = longest_palindrome.keys.last
+	return "not possible" if longest_palindrome.empty? || longest_palindrome.length < 3
+	final = ""
+	str.each_char do |el|
+		final << el if !longest_palindrome.include?(el)
+	end
+	final
+end
+   
