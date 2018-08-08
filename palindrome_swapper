@@ -1,0 +1,21 @@
+Have the function PalindromeSwapper(str) take the str 
+parameter being passed and determine if a palindrome 
+can be created by swapping two adjacent characters 
+in the string. If it is possible to create a palindrome, 
+then your program should return the palindrome, if not 
+then return the string -1. The input string will only 
+contain alphabetic characters. For example: if str is 
+"rcaecar" then you can create a palindrome by swapping 
+the second and third characters, so your program should 
+return the string racecar which is the final palindromic 
+string. 
+
+def PalindromeSwapper(str)
+    (0..str.length-2).each do |i|
+    		dup_string = str.dup
+    		dup_string[i] = dup_string[i+1]
+    		dup_string[i+1] = str[i]
+        return dup_string if dup_string == dup_string.reverse
+    end
+    return "-1"
+end
