@@ -1,0 +1,20 @@
+Have the function PrimeMover(num) return the numth prime number. 
+The range will be from 1 to 10^4. For example: if num is 16 
+the output should be 53 as 53 is the 16th prime number. 
+
+def PrimeMover(num)
+	prime_array = []
+	i = 2 
+	until prime_array.count == num 
+		if prime?(i)
+			prime_array << i 
+		end
+		i += 1 
+	end
+	prime_array[-1]
+end
+
+def prime?(num)
+	factors = (1..num).select {|el| (num % el).zero?}
+	factors.count == 2 
+end
