@@ -1,0 +1,24 @@
+Have the function CountingMinutes(str) take the str 
+parameter being passed which will be two times 
+(each properly formatted with a colon and am or pm) 
+separated by a hyphen and return the total number of 
+minutes between the two times. The time will be in a 
+12 hour clock format. For example: if str is 9:00am-10:00am 
+then the output should be 60. If str is 1:00pm-11:00am 
+the output should be 1320. 
+
+def GetTime(str)
+    hours, mins = str.split(":")
+    hours = hours.to_i % 12
+    hours += 12 if mins.include?("pm")
+    Time.new(1,1,1,hours,mins.to_i)
+end
+
+def CountingMinutes(str)
+    time1, time2 = str.split("-")
+    time1, time2 = GetTime(time1), GetTime(time2)
+    final_mins = ((time1 - time2) / 60).round
+    final_mins = (1440 - final_mins) % 1440
+    return final_mins
+end
+
