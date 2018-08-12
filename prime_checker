@@ -1,0 +1,18 @@
+Have the function PrimeChecker(num) take num and return 1 
+if any arrangement of num comes out to be a prime number, 
+otherwise return 0. For example: if num is 910, the output 
+should be 1 because 910 can be arranged into 109 or 019, 
+both of which are primes. 
+
+def prime?(num)
+	prime_factors = (1..num).select {|el| (num % el).zero?}
+	prime_factors.count == 2
+end
+
+def PrimeChecker(num)
+	num = num.to_s.chars
+	num.permutation.to_a.each do |el|
+		return 1 if prime?(el.join.to_i)
+	end
+	return 0
+end
