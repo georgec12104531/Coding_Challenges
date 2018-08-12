@@ -1,0 +1,16 @@
+Have the function PermutationStep(num) take the num 
+parameter being passed and return the next number 
+greater than num using the same digits. For example: 
+if num is 123 return 132, if it's 12453 return 12534. 
+If a number has no greater permutations, return -1 
+(ie. 999). 
+
+def PermutationStep(num)
+	num = num.to_s.chars
+	number_array = num.permutation.to_a
+	number_array = number_array.uniq.sort
+	return -1 if number_array[-1] == num
+	number_array.each_with_index do |combo, idx|
+			return number_array[idx+1].join.to_i if combo == num 
+	end
+end
