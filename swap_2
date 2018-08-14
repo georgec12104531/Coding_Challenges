@@ -1,0 +1,35 @@
+Have the function SwapII(str) take the str parameter and 
+swap the case of each character. Then, if a letter is between 
+two numbers (without separation), switch the places of the two 
+numbers. For example: if str is "6Hello4 -8World, 7 yes3" the 
+output should be 4hELLO6 -8wORLD, 7 YES3. 
+
+def swap(str)
+	numbers = str.scan(/\d/)
+	num_indexes = []
+	new_str = str.dup
+	(0..str.length-1).each do |i|
+		if new_str[i] == new_str[i].upcase 
+			new_str[i] = new_str[i].downcase 
+		elsif new_str[i] == new_str[i].downcase
+			new_str[i] = new_str[i].upcase  
+		end
+		num_indexes << i if numbers.include?(str[i])
+	end
+	if num_indexes.count == 2 
+		
+		new_str[num_indexes[0]] = str[num_indexes[1]]
+		new_str[num_indexes[1]] = str[num_indexes[0]]
+	end
+	new_str
+end
+swap("du5d4e")
+
+
+def SwapII(str)
+	str = str.split(" ")
+	str.map do |el|
+		swap(el)
+	end
+	.join(" ")
+end
