@@ -1,0 +1,19 @@
+Have the function BracketMatcher(str) take the str parameter 
+being passed and return 1 if the brackets are correctly matched 
+and each one is accounted for. Otherwise return 0. For example: 
+if str is "(hello (world))", then the output should be 1, but 
+if str is "((hello (world))" the the output should be 0 because 
+the brackets do not correctly match up. Only "(" and ")" will 
+be used as brackets. If str contains no brackets return 1. 
+
+def BracketMatcher(str)
+	return 1 if !str.include?("(") or !str.include?(")")
+	left_counter = 0 
+	right_counter = 0 
+	str.each_char do |el|
+		left_counter += 1 if el == "("
+		right_counter += 1 if el == ")"
+		return 0 if right_counter > left_counter
+	end
+	left_counter == right_counter ? 1 : 0
+end
