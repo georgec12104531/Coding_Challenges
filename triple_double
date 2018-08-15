@@ -1,0 +1,25 @@
+Have the function TripleDouble(num1,num2) take both parameters 
+being passed, and return 1 if there is a straight triple of a 
+number at any place in num1 and also a straight double of the 
+same number in num2. For example: if num1 equals 451999277 and 
+num2 equals 41177722899, then return 1 because in the first 
+parameter you have the straight triple 999 and you have a straight 
+double, 99, of the same number in the second parameter. 
+If this isn't the case, return 0. 
+
+def TripleDouble(num1,num2)
+	triples = []
+	doubles = []
+	num1 = num1.to_s
+	num2 = num2.to_s
+	(0..num1.length-3).each do |i|
+		triples << num1[i] if num1[i..i+2].each_char.all? {|el| el == num1[i]}
+	end
+	(0..num2.length-2).each do |i|
+		doubles << num2[i] if num2[i..i+1].each_char.all? {|el| el == num2[i]}
+	end	
+	return 0 if triples.empty? || doubles.empty?
+	return 1 if doubles[0] == triples[0]
+	return 0
+end
+   
