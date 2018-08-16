@@ -1,0 +1,24 @@
+Have the function MultipleBrackets(str) take the str parameter 
+being passed and return 1 #ofBrackets if the brackets are correctly 
+matched and each one is accounted for. Otherwise return 0. For 
+example: if str is "(hello [world])(!)", then the output should 
+be 1 3 because all the brackets are matched and there are 3 pairs 
+of brackets, but if str is "((hello [world])" the the output 
+should be 0 because the brackets do not correctly match up. 
+Only "(", ")", "[", and "]" will be used as brackets. If str 
+contains no brackets return 1. 
+
+def MultipleBrackets(str)
+	left_count_parenthesis = 0 
+	left_count_bracket = 0 
+	right_count_parenthesis = 0 
+	right_count_bracket = 0 
+	str.each_char do |ch|
+		left_count_parenthesis += 1 if ch == "(" 
+		left_count_bracket += 1 if ch == "["
+		right_count_parenthesis += 1 if ch == ")"
+		right_count_bracket += 1 if ch == "]"
+	end
+	return "1 #{left_count_bracket + left_count_parenthesis}" if left_count_parenthesis + left_count_bracket == right_count_parenthesis + right_count_bracket and left_count_parenthesis == right_count_parenthesis and left_count_bracket == right_count_bracket
+	return 0
+end
