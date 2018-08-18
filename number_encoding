@@ -1,0 +1,21 @@
+Have the function NumberEncoding(str) take the str parameter and 
+encode the message according to the following rule: encode every 
+letter into its corresponding numbered position in the alphabet. 
+Symbols and spaces will also be used in the input. For example: 
+if str is "af5c a#!" then your program should return 1653 1#!. 
+
+
+def NumberEncoding(str)
+	alphabet = ("a".."z").to_a
+	#str = str.chars
+	#Iterate through the string.map
+	#if alphabet.include?(el) el == alphabet.index(el)
+	str = str.chars.map! do |el|
+		if alphabet.include?(el.downcase)
+			alphabet.index(el.downcase) + 1
+		else 
+			el
+		end
+	end
+	str.join("")
+end
