@@ -1,0 +1,14 @@
+Have the function DistinctList(arr) take the array of numbers stored 
+in arr and determine the total number of duplicate entries. For example 
+if the input is [1, 2, 2, 2, 3] then your program should output 2 because 
+there are two duplicates of one of the elements. 
+
+def DistinctList(arr)
+	#Createa a counter Hash.new(0)
+	counter_hash = Hash.new(0)
+	#iterate through the array .each 
+	arr.each {|el| counter_hash[el] += 1}
+	# hash[el] += 1 
+	# return hash.values.reduce(:+) - hash.values.length
+	return counter_hash.values.reduce(:+) - counter_hash.values.length
+end
