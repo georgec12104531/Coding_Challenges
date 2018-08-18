@@ -1,0 +1,58 @@
+Have the function MostFreeTime(strArr) read the strArr parameter 
+being passed which will represent a full day and will be filled 
+with events that span from time X to time Y in the day. The format 
+of each event will be hh:mmAM/PM-hh:mmAM/PM. For example, strArr 
+may be ["10:00AM-12:30PM","02:00PM-02:45PM","09:10AM-09:50AM"]. 
+Your program will have to output the longest amount of free time 
+available between the start of your first event and the end of your 
+last event in the format: hh:mm. The start event should be the earliest 
+event in the day and the latest event should be the latest event in 
+the day. The output for the previous input would therefore be 01:30 
+(with the earliest event in the day starting at 09:10AM and the latest 
+event ending at 02:45PM). The input will contain at least 3 events and 
+the events may be out of order. 
+
+def time(str)
+	hours, mins = str.split(":")
+	hours = hours.to_i % 12 
+	hours += 12 if mins.include?("PM")
+	timer = Time.new(1,1,1,hours, mins.to_i)
+end
+
+
+def time_difference(time1, time2)
+	time_diff = (time(time1) - time(time2)) / 60 
+	final_time = ((1440 - time_diff) % 1440).round.abs
+end
+
+
+def convert_minutes(min)
+	hours = 0 
+	while min >= 60 
+		hours += 1 
+		min -= 60 
+	end
+	min < 10 ? min = "0#{min}" : min = min.to_s
+	return "0#{hours}:#{min}"
+end
+convert_minutes(4)
+
+
+def MostFreeTime(strArr)
+	am_crew, pm_crew = [], []
+	max_time = 0
+	strArr.each do |el|
+		el_dup = el.dup.split("-")
+		am_crew << el if el_dup[0].include?("AM")
+		pm_crew << el if el_dup[0].include?("PM")
+	end
+	pm_crew = pm_crew.sort_by {|el| time(el)}
+	sorted_array = am_crew.sort! + pm_crew
+	sorted_array.map! {|el| el.split("-")}.flatten!
+	idx = 1 
+	while idx < sorted_array.length - 1
+		max_time = time_difference(sorted_array[idx], sorted_array[idx+1]) if time_difference(sorted_array[idx], sorted_array[idx+1]) > max_time
+		idx += 2
+	end
+	convert_minutes(max_time)
+end
