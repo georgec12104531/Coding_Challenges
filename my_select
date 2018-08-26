@@ -1,0 +1,13 @@
+class Array
+
+  def my_select(&prc)
+    final_array = []
+
+    self.each do |el|
+      final_array << el if prc.call(el)
+    end
+
+    final_array
+  end
+
+end
