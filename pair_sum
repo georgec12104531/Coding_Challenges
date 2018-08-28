@@ -1,0 +1,30 @@
+class Array
+  # Write a new `Array#pair_sum(target)` method that finds all pairs of
+  # positions where the elements at those positions sum to the target.
+
+  # NB: ordering matters. I want each of the pairs to be sorted
+  # smaller index before bigger index. I want the array of pairs to be
+  # sorted "dictionary-wise":
+  #   [0, 2] before [1, 2] (smaller first elements come first)
+  #   [0, 1] before [0, 2] (then smaller second elements come first)
+
+  # Process:
+  # - Create a final array
+  # - iterate through the self
+  # - return [i, j] if == target
+
+  def pair_sum(target)
+
+    final_array = []
+
+    (0...self.length-1).each do |i|
+      (i+1...self.length).each do |j|
+        if self[i] + self[j] == target
+          final_array << [i, j]
+        end
+      end
+    end
+    final_array
+  end
+
+end
