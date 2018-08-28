@@ -1,0 +1,26 @@
+# Write a method that binary searches an array for a target and returns its
+# index if found. Assume a sorted array.
+
+# NB: YOU MUST WRITE THIS RECURSIVELY (searching half of the array every time).
+# We will not give you points if you visit every element in the array every time
+# you search.
+
+# For example, given the array [1, 2, 3, 4], you should NOT be checking
+# 1 first, then 2, then 3, then 4.
+
+def binary_search(arr, target)
+  return nil if arr.length == 0
+
+  mid = arr.length / 2
+
+  case arr[mid] <=> target
+  when 1
+    binary_search(arr.take(mid), target)
+  when 0
+    return mid
+  when -1
+    search_b = binary_search(arr.drop(mid + 1), target)
+    search_b.nil? ? nil : search_b + mid + 1
+  end
+
+end
