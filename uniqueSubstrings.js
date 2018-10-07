@@ -9,3 +9,17 @@ function substrings(string) {
 
   return substring;
 }
+
+
+function uniqueSubstrings(string) {
+  let subs = substrings(string);
+  let uniqueSubs = [];
+
+  for (var i = 0; i < subs.length; i++) {
+    if (!uniqueSubs.includes(subs[i])) {
+      uniqueSubs.push(subs[i]);
+    }
+  }
+
+  return uniqueSubs;
+}
