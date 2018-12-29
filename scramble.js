@@ -4,3 +4,12 @@ const scramble = (strOne, strTwo) => {
   return strTwo.split("").every(char => strOneHash[char])
 }
 
+
+const scramble = (strOne, strTwo) => {
+  const hash = strOne.split("").reduce((hash, char) => {
+    hash[char] ? hash[char]++ : hash[char] = 1;
+    return hash;
+  }, {})
+
+  return strTwo.split("").every(char => hash[char]) 
+}
