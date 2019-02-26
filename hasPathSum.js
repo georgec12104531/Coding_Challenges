@@ -35,4 +35,27 @@ const hasPathSum = function(root, sum) {
 };
 
 
+//#3
+
+const hasPathSum = (root, sum) => {
+  let a = false;
+      b = false
+
+  sum -= root.val;
+  if (sum === 0 && !root.left && !root.right) {
+    return true;
+  }
+
+  if (root.left) {
+   a = hasPathSum(root.left, sum);   
+  }
+  if (root.right) {
+   b = hasPathSum(root.right, sum);   
+  }
+
+  return a || b
+}
+
+
+
 
