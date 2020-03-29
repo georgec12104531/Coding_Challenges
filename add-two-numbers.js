@@ -38,3 +38,22 @@ const addTwoNumbers = (l1, l2) => {
 };
 
 console.log(addTwoNumbers(n1, m1));
+
+const reverseLinkedList = (currentNode) => {
+  // keep current node
+  let previous = null;
+
+  // while the current node is truthy
+  while (currentNode) {
+    // Keep a copy of the next node 
+    let copyNextNode = currentNode.next;
+    // reverse the linked list, if first node point to null, if not then point to the previous one
+    currentNode.next = previous;
+    // make the currentNode the previous node
+    previous = currentNode;
+    // Move the current node forward
+    currentNode = copyNextNode; 
+  }
+
+  return previous;
+}
