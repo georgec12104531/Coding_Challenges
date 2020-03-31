@@ -39,3 +39,33 @@ const lengthOfLongestSubstring = (s) => {
 
   return leaderLength
 };
+
+//Refactored
+
+const isUnique = (str, start, end) => {
+  let letterObj = {};
+  for(let i = start; i < end; i++) {
+    ch = str[i];
+    if (letterObj[ch]) {
+      return false;
+    } else {
+      letterObj[ch] = true;
+    }
+  }
+
+  return true;
+}
+
+const lengthOfLongestSubstring = (s) => {
+  let leader = 0;
+ for (let i = 0; i < s.length; i++) {
+   for (let j = i + 1; j < s.length; j++) {
+     if (isUnique(s, i, j)) {
+       length = j - i;
+       leader = Math.max(leader, length)
+     }
+   } 
+ }
+
+ return leader;
+};
