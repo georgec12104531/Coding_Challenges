@@ -42,3 +42,22 @@ const twoSum = (arr, target) => {
 
   return resultArr;
 }
+
+var twoSum = function(nums, target) {
+    let differenceObj = {};
+    
+    for (let i = 0; i < nums.length; i++) {
+        let currentEl = nums[i]
+        let diff = target - currentEl;
+       
+        if (diff in differenceObj) {
+            return [ differenceObj[diff], i]
+        }
+           
+       differenceObj[currentEl] = i;
+    }
+    
+    return [];
+};
+
+twoSum([2, 7, 1, 2, 3], 9)
