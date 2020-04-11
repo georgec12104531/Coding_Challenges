@@ -1,0 +1,26 @@
+var isValid = function(s) {
+  brackObj = {
+    '{': '}',
+    '(': ')',
+    '[': ']'
+  }
+
+  let leftBrackets = ''
+
+  for (let i = 0; i < s.length; i++) {
+    console.log(i)
+    if (brackObj[s[i]]) {
+      leftBrackets = s[i] + leftBrackets;
+    }
+
+    if (!brackObj[s[i]]) {
+        if (brackObj[leftBrackets[0]] === s[i]) {
+          leftBrackets = leftBrackets.slice(1, leftBrackets.length);
+        } else {
+          return false;
+        }
+    }
+  } 
+  
+  return true;
+};
