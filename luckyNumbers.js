@@ -23,22 +23,20 @@ Output: [15]
 
 const luckyNumbers = (matrix) => {
   let luckyNumArr = [];
-  let rowMinNum = {};
+  // Using a Set for O(1) lookup time
+  let rowMinNum = new Set();
 
   // Find a minimum in row;
-  matrix.forEach((row) => {
-    let min;
+  matrix.forEach((row, i) => {
+    let min = Infinity;
     row.forEach((item, index) => {
-      console.log(item)
-      if (!min || item < min) {
-        // console.log('hi')
+      if (item < min) {
+          rowMinNum.delete(min);
           min = item;
-         rowMinNum[index] = item;
+         rowMinNum.add(item);
       }
     })
   })
-
-  console.log(rowMinNum)
   
   // Find max in column
   for (let i=0; i < matrix[0].length; i++) {
@@ -48,11 +46,10 @@ const luckyNumbers = (matrix) => {
       if(!columnMax || currentItem > columnMax) {
         columnMax = currentItem;
       }
-      if (j === matrix.length - 1 && columnMax === rowMinNum[i]) {
-        console.log(currentItem)
-        luckyNumArr.push(currentItem);
-      }
     })
+    if(rowMinNum.has(columnMax)) {
+      luckyNumArr.push(columnMax);
+    }
   }
 
   return luckyNumArr;
