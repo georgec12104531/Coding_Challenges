@@ -138,16 +138,11 @@ const isValid = (s) => {
     console.log('BRACKET: ', bracket);
     if (bracketMatchingObj[bracket]) {
       stack.push(bracket);
-
-      console.log('left', 'b:', bracket, 'q: ', stack);
     } else {
       let lastBracket = stack[stack.length - 1];
-      console.log('last', lastBracket);
-      console.log('right', bracketMatchingObj[lastBracket], stack, 'bracket', bracket);
+      
       if (bracketMatchingObj[lastBracket] !== bracket) return false;
       stack.pop();;
-
-      console.log('after pop', stack);
     }
   }
 
