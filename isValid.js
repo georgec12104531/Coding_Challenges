@@ -56,3 +56,102 @@ var isValid = function(s) {
   
   return true;
 };
+
+
+// Example 1:
+
+// Input: "()"
+// Output: true
+// Example 2:
+
+// Input: "()[]{}"
+// Output: true
+// Example 3:
+
+// Input: "(]"
+// Output: false
+// Example 4:
+
+// Input: "([)]"
+// Output: false
+// Example 5:
+
+// Input: "{[]}"
+// Output: true
+
+// Plan:
+// - Obj, to identify matching brackets 
+// - Keep track of the left brackets, queue?
+// - Iterate through the strBrackets
+//   if (its a left bracket)
+//     add it to the queue (unshift) 
+//   if (it's a right racket)
+//     check the queue to see that it's matching with bracketObj, 
+//       return false, if not 
+//     pop off queue 
+// - return true;
+
+
+// ['],
+
+// ' ( [ { } ] )'
+//             |
+
+
+// refactor, change bracketMatchingObj and condition to match
+
+
+// const isValid = (s) => {
+//   bracketMatchingObj = {
+//     ')':'(',
+//     ']':'[',
+//     '}': '{', 
+//   }
+
+//   let queue = [];
+
+//   for(let i = 0; i < s.length; i++) {
+//     let bracket = s[i];
+
+//     if (!bracketMatchingObj[bracket]) {
+//       queue.unshift(bracket);
+//     } else {
+//       if (bracketMatchingObj[bracket] !== queue[queue.length - 1]) return false
+//       queue.pop();;
+//     }
+//   }
+    
+//   return true;
+// };
+
+const isValid = (s) => {
+  bracketMatchingObj = {
+    '(':')',
+    '[':']',
+    '{': '}', 
+  }
+
+  let stack = [];
+
+  for(let i = 0; i < s.length; i++) {
+    let bracket = s[i];
+    console.log('BRACKET: ', bracket);
+    if (bracketMatchingObj[bracket]) {
+      stack.push(bracket);
+
+      console.log('left', 'b:', bracket, 'q: ', stack);
+    } else {
+      let lastBracket = stack[stack.length - 1];
+      console.log('last', lastBracket);
+      console.log('right', bracketMatchingObj[lastBracket], stack, 'bracket', bracket);
+      if (bracketMatchingObj[lastBracket] !== bracket) return false;
+      stack.pop();;
+
+      console.log('after pop', stack);
+    }
+  }
+
+  return stack.length === 0;
+};
+
+isValid("[{{{{")
