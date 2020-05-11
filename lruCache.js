@@ -62,8 +62,39 @@ function LRU(capacity) {
   }
 
   this.put(key, value) {
+    if (this.obj[key]) {
+      this.get(key)
+    } else {
+      // Add the key to this object
+      this.obj[key] = { key, value, prev: null, next: null}
+      // This node now becomes the new head
+      if (this.head) {
+        this.head.prev = this.obj[key];
+        this.obj[key].next = this.head; 
+      }
 
+      // Regardless, the new node that we are adding becomes the new head
+      this.head = this.obj[key];
+
+      if (!this.tail) {
+        this.tail = this.obj[key];
+      }
+
+      this.count++
+    }
+    
+    // If LRU is at capacity
+    if (this.count > this.capacity) {
+      let removedKey = this.tail.key;
+
+      // if there are more than one nodes in the linked list 
+      if (this.tail.prev) {
+        this.tail.prev.next = null;
+        this.tail = this.tail.prev;
+      }
+      delete this.obj[removedKey];
+
+      this.count--;
+    }
   }
-
-
 }
