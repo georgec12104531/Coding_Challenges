@@ -21,67 +21,49 @@
 // cache.put(4, 4);    // evicts key 1
 // cache.get(1);       // returns -1 (not found)
 // cache.get(3);       // returns 3
-
-function Node(val, next, prev) {
+function Node(val, next=null, prev=null) {
   this.val = val;
   this.next = next;
   this.prev = prev;
 }
 
-class LRU {
-  constructor(capacity) {
-    this.capacity = capacity;
-    this.size = 0;
-    this.cache = {};
-    this.head;
-    this.tail;
+function LRU(capacity) {
+  this.count = count;
+  this.obj = {};
+  this.head;
+  this.tail;
+  this.capacity = capacity;
 
-  }
+  this.get(key) {
 
-  get(val) {
-    // console.log(this.cache);
-    return this.cache[val] ? this.cache[val].val : -1;
-  }
+    // Check to see that the value exists
+    if (this.obj[key]) {
+      { value, prev, next } = this.obj[key];
 
-  put(key, val) {
-    if (this.size === this.capacity) {
-      this.tail.prev = null;
-      this.tail.prev.next = null;
-      this.tail = tail.prev;
-    } else if (this.size === 0) {
-      
+      prev.next = next;
+      next.prev = prev;
+
+      if (this.tail === this.obj[key]) {
+        this.tail = this.tail.prev || this.obj[key];
+      }
+
+      this.obj[key].prev = null;
+      this.obj[key].next = null;
+
+      if(this.obj[key] !== this.head) {
+        this.head.prev = this.obj[key];
+        this.obj[key].next = this.head;
+        this.head = this.obj[key];
+      }
+      return value;
+    } else {
+      return -1
     }
-    
-    const newNode = new Node(val, this.head, null);
-    if (newNode.next) {
-      newNode.next.prev = newNode;
-    }
-    console.log(newNode.next);
-    // newNode.next.prev = newNode;
-    this.head = newNode;
-    // this.head.next.prev = newNode;
-
-
-    this.cache[key] = newNode;
-    this.size++;
   }
+
+  this.put(key, value) {
+
+  }
+
+
 }
-
-const lru = new LRU(2);
-
-lru.put(4, 4);
-lru.put(3, 3);
-// lru.put(2, 2);
-
-
-// lru.put(2, 2);
-// lru.put(1, 1);
-
-// cache.put(1, 1);
-// cache.put(2, 2);
-// cache.get(1);       // returns 1
-
-// console.log('-----------------------');
-// lru.get(3)?;
-
-// console.log(lru);
