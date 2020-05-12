@@ -1,45 +1,28 @@
-function Node(val, next) {
-  this.val = val;
-  this.next = next;
-}
+const mergeKSorted = (arr) => {
+  const dummyHead = new Node(null);
+  let prev = dummyHead;
 
-const aFour = new Node(4, null);
-const aTwo = new Node(2, aFour);
-const aOne = new Node(1, aTwo);
+  min = arr[0].val;
 
-const bFive = new Node(5, null);
-const bFour = new Node(4, bFive);
-const bThree = new Node(3, bFour);
+  while (min || min === 0) {
+    min = arr[0].val
+    let index;
+    // potentially null
+    for(i = 0; i < arr.length; i++) {
+      // Set initial min
+      if (arr[i].val < min) {
+        min = arr[i].val;
+        index = i;
+      } 
+    }  
 
-const cThree = new Node(3, null);
-const cTwo = new Node(2, cThree);
-const cOne = new Node(1, cTwo);
-
-const mergeKSortedLists = (lists) => {
-  let tempHead = new Node(null)
-  let previous = tempHead;
-  let status = true;
-
-  while (status) {
-    let lowestNumIndex;
-    
-    lists.forEach((list, index) => {
-      if (
-        lists[index] && lists[lowestNumIndex] && lists[index].val <= lists[lowestNumIndex].val ||
-        lists[index] && !lists[lowestNumIndex]) {
-              lowestNumIndex = index
-      }
-    })
-
-    const newOne = new Node(lists[lowestNumIndex].val)
-    lists[lowestNumIndex] = lists[lowestNumIndex].next    
-    previous.next = newOne
-    previous = newOne
-    
-    status = lists.some((list) => list)
+    prev.next = new Node(min)
+    prev = arr[min];
+    arr[index] = arr[index].next
   }
 
-  return tempHead.next;     
+  return dummyHead.next;
 }
 
-console.log(mergeKSortedLists([aOne, bThree, cOne]))
+
+
