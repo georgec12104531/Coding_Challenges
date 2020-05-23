@@ -31,39 +31,40 @@
 // - return array
 
 const threeSum = (arr) => {
-  // worst case O(nlogn)
-  arr = arr.sort();
+  let result = [];
+  const sorted = arr.sort((a, b) => a - b);
 
-  resultSet = new Set;
+  for(let i = 0; i < sorted.length - 2; i++) {
+    let l = i + 1;
+    let r = sorted.length - 1;
 
-  // O(n^2)
-  for(let i=0;i < arr.length - 2; i++) {
-    let left = i + 1;
-    let right = arr.length - 1;
+    if (i > 0 && sorted[i] === sorted[i - 1]) {
+     continue;
+    }
 
+    while (l < r) {
+      let currentSum = sorted[i] + sorted[l] + sorted[r];
 
-    if(arr[i] === arr[i-1]) continue;
+      if (currentSum < 0) {
+        l++;
+      } else if (currentSum > 0) {
+        r--;
+      } else if (currentSum === 0) {
+        result.push([sorted[i], sorted[l], sorted[r]])
+        l++;
+        r--;
 
-    while (left < right) {
+        while (l < r && arr[l] === arr[l - 1]) {
+          l++;
+        }
 
-      if (arr[i] + arr[left] + arr[right] < 0) {
-        left++
-      } else if (arr[i] + arr[left] + arr[right] > 0) {
-        right--
-      } else if (arr[i] + arr[left] + arr[right] === 0) {
-        resultSet.add([arr[i], arr[left], arr[right]])
-        left++
-        right--
-       
-       	while (left < right && arr[left] === arr[left - 1]) {
-					left++;
-				}
-				while (left < right && arr[right] === arr[right + 1]) {
-					right--;
+        while (l < r && arr[r] === arr[r + 1]) {
+          r--;
         }
       }
     }
   }
 
-  return Array.from(resultSet)
+  return result;
 }
+
