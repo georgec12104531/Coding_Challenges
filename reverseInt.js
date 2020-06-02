@@ -50,3 +50,63 @@ const reverse = (int) => {
 
   return isNeg ? reversedInt * -1 : reversedInt
 }
+
+// Given a 32-bit signed integer, reverse digits of an integer.
+
+// Example 1:
+
+// Input: 123
+// Output: 321
+// Example 2:
+
+// Input: -123
+// Output: -321
+// Example 3:
+
+// Input: 120
+// Output: 21
+
+const reverseInt = (int) => {
+  let strIntArr = int.toString().split('');
+  revResultStr = '';
+  const isNeg = int < 0;
+  if (isNeg) {
+    revResultStr += '-';
+  }
+
+  for(let i = strIntArr.length - 1; i >= 0; i--) {
+    let current = strIntArr[i];
+    if (i === strIntArr.length - 1 && strIntArr[i] === '0') {
+      while (strIntArr[i] === '0') {
+        i--;
+      }
+      i++;
+    } else {
+      revResultStr = revResultStr.concat(current);
+    }
+  }
+  
+  return parseInt(revResultStr);
+}
+
+const reverse = (int) => {
+  let isNeg = int < 0;
+  
+  reversedIntStr = int
+    .toString()
+    .split('')
+    .reverse()
+    .join('')
+
+  let maxNum = Math.pow(2, 31) - 1;
+  
+  resultInt = parseInt(reversedIntStr);
+
+  if (isNeg) {
+    resultInt = -(resultInt);
+  }
+  if (Math.abs(resultInt) >= maxNum) return 0;
+  return resultInt;
+}
+
+reverse(-123000)
