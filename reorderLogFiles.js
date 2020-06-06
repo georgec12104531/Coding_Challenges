@@ -1,34 +1,52 @@
-// Plan: 
-// - extract all the strings using letters.
-// - sort the stringArr 
-// - concat both arrays together
-
 // Input: logs = ["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]
 // Output: ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"]
 
+// Plan
+// Loop through the array, 
+// if the element is a dig add it to the dig array 
+// if the elemnt is let add it to the letter array 
 
-const reorderLogFiles = (logs) => {
-  const getBody = (str) => (str.split(' ')[1][0]);
-  const alphabet = 'abcdefghijklmnopqrstuvqxyz';
+// Sort the digital array 
+// Sort the letter array 
 
-  const strLetterArr = logs.filter((str) => {
-    const firstEl = str.split(' ')[1][0];
-    return alphabet.includes(firstEl)
-  })
+// combine the dig with the letter array 
 
-  const compare = (a, b) => {
-    return getBody(a).localeCompare(getBody(b));
-  };
+ const reorderLogFiles = (arr) => {
 
-  const sortedStrLetterArr = strLetterArr.sort(compare)
+   // Filter the dig strings
+   // O(n)
+   let digArr = arr.reduce((acc, str) => {
+     if (str[0] === 'd') {
+        acc.push(str);
+     }
+    
+     return acc;
+   }, []);
 
-  logs.forEach((log) => {
-    if (!isNaN(getBody(log))) {
-      sortedStrLetterArr.push(log);
-    }
-  })
+   // Sort digArr by the number after 'dig'
+   let sortedDigArr = digArr.sort((a, b) => a[3] - b[3]);
 
-  return sortedStrLetterArr;
-};
+   // Filter  letter strings
+   // O(n)
+   let letArr = arr.reduce((acc, str) => {
+     if (str[0] === 'l') {
+       acc.push(str)
+     }
+     
+     return acc
+   }, []);
 
-reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]);
+    // console.log('letARr', letArr)
+
+   let sortedLetArr = letArr.sort((a,b) => {
+      var aSlice = a.slice(5);
+      var bSlice = b.slice(5);
+      // a is less than b return -1 
+      // b is less than a return 1
+      return aSlice < bSlice ? -1 : 1;
+    });
+
+   return [...sortedLetArr, ...sortedDigArr];
+ }
+
+ reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])
