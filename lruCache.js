@@ -98,3 +98,53 @@ function LRU(capacity) {
     }
   }
 }
+
+// ------------------------------------------------------------------
+
+function LRUCache(capacity) {
+  this.capacity = capacity;
+  this.size = size;
+  this.head = null;
+  this.tail = null
+  this.dictionary = {};
+}
+
+LRUCache.prototype.get = (key) => {
+  // For nodes that already exist inside the cache
+  if (this.dictionary[key]) {
+    let { value, prev, next } = this.dictionary[key];
+  
+    // Remove the node from the linked list 
+    // For nodes that aren't the head, have the previous nodes next pointer, 
+    // point to the removed nodes next
+    if (prev) { prev.next = next }
+    // for nodes that aren't the tail, have removed node's next node point to its previous node 
+    // unless it's the head. If it's the head, assigning its next node's previous to point to its previous
+    // would make it the new head, since it would point to null
+    if (next) { next.prev = prev || next.prev}
+
+    // If the node is the tail, then assign it the new tail to its previous. However, 
+    // if the node is the only node in the linked list, then we don't want to point this.tail to null,
+    // so we will keep it as it is. 
+    if (this.tail === this.dictionary[key]) {
+      this.tail = prev || this.dictionary[key];
+    }
+
+    // This node will now become the new head and its prev will point to null
+    this.dictionary[key].prev = null;
+
+    if (this.head !== this.dictionary[key]) {
+      // Have the current head point to the current node
+      this.head.prev = this.dictionary[key];
+      // Have the node point to the old head
+      this.dictionary[key].next = this.head;
+    }
+
+    // The node becomes the new head
+    this.head = this.dictionary[key];
+
+    return value;
+  }
+  // Node doesn't exist inside the cache
+  return -1;
+}
