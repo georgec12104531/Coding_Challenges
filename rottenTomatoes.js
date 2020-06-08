@@ -86,3 +86,68 @@ function infect(tomato, arr, q) {
   
   return newlyInfect;
 }
+
+
+const orangesRotting = (grid) => {
+  let minutes = 0;
+  let queue = [];
+  let freshOranges = 0;
+  // Find first rotten Orange 
+  for(let r = 0; r < grid.length; r++) {
+    for(let c = 0; c < grid[r].length; c++) {
+      if (grid[r][c] === 2) {
+        queue.push([r, c])
+      } else if (grid[r][c] === 1) {
+        freshOranges++;
+      }
+    }
+  }
+
+  while (queue.length && freshOranges) {
+    minutes++;
+    let newQueue = []; 
+
+    while (queue.length) {
+      let current = queue.shift();
+      let currentRow = current[0], 
+          currentCol = current[1]
+
+      let top = currentRow - 1;
+      let bottom = currentRow + 1;
+      let left = currentCol - 1;
+      let right = currentCol + 1
+      
+      // Check top row
+      if (top >= 0 && grid[top][currentCol] === 1) {
+        grid[top][currentCol]++;
+        newQueue.push([top, currentCol])
+        freshOranges--;
+      }
+      
+      // Check bottom row
+      if (bottom < grid.length && grid[bottom][currentCol] === 1) {
+        grid[bottom][currentCol]++;
+        newQueue.push([bottom, currentCol]);
+        freshOranges--;
+      }
+
+      // Check left col
+      if (left >= 0 && grid[currentRow][left] === 1) {
+        grid[currentRow][left]++;
+        newQueue.push([currentRow, left])
+        freshOranges--
+      }
+
+      // Check right col
+      if (right < grid[currentRow].length && grid[currentRow][right] === 1) {
+        grid[currentRow][right]++;
+        newQueue.push([currentRow, right])
+        freshOranges--;
+      }
+    }
+
+    queue = newQueue;
+  }
+
+  return freshOranges === 0 ? minutes : -1
+}
