@@ -69,3 +69,47 @@ const lengthOfLongestSubstring = (s) => {
 
  return leader;
 };
+
+//--------------------------------------------------------------------------------------
+
+function lengthOfLongestSubstring(s) {
+    let map = {};
+    let left = 0;
+    let max = 0;
+
+    for(let i = 0; i < s.length; i++) {
+      let current = s[i];
+
+      // Check to see that the letter exists inside of the current substring
+      // If it does, then shift left to the next index;
+      // Uses >= operator to account for 0
+      if (map[current] >= left) {
+        left = map[current] + 1;
+      } 
+
+      map[current] = i;
+
+      max = Math.max(max, i - left + 1);
+      console.log(max)
+    }
+
+    return max; 
+}
+
+function lengthOfLongestSubstring(s) {
+  let map = {};
+  let left = 0;
+
+  let maxLength = s.split('').reduce((max, el, i) => {
+    if (map[el] >= left) {
+      left = map[el] + 1;
+    }
+
+    map[el] = i;
+    max = Math.max(max, i - left + 1);
+  }, 0)
+
+  return maxLength;
+}
+
+lengthOfLongestSubstring('abcabcbb')
