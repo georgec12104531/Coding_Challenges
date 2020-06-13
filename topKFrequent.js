@@ -30,3 +30,53 @@ const topKFrequent = (arr, k) => {
 
   return result;
 }
+
+///////////////////
+
+
+// Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+// Output: ["i", "love"
+
+// Plan
+// Create object 
+// Create array of n empty array(s) 
+// Loop through to add to count obj
+// Loop through obj and add key to count index 
+// Loop through array backwards and get the array that is not empty 
+// return sorted
+
+// n log(n)
+const topKFrequent = (arr) => {
+  let buckets = new Array(arr.length + 1).fill().map(() => []);
+  let countObj = {};
+
+  for(let i = 0; i < arr.length; i++) {
+    let current = arr[i];
+
+    if (countObj[current]) {
+      countObj[current] = countObj[current] + 1;
+    } else {
+      countObj[current] = 1;
+    }
+  }
+
+  console.log(countObj)
+
+  for(let key in countObj) {
+    buckets[countObj[key]].push(key);
+  }
+
+  let mostFrequent;
+
+  for(let i = buckets.length - 1; i >= 0; i--) {
+    let current = buckets[i];
+    if (current.length) {
+      mostFrequent = current;
+      break;
+    }
+  }
+
+  return mostFrequent.sort();                                  
+}
+
+topKFrequent(["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"])
