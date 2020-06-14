@@ -80,3 +80,39 @@ const topKFrequent = (arr) => {
 }
 
 topKFrequent(["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"])
+
+// Example 1:
+// Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+// Output: ["i", "love"]
+// Explanation: "i" and "love" are the two most frequent words.
+//     Note that "i" comes before "love" due to a lower alphabetical order.
+// Example 2:
+// Input: ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], k = 4
+// Output: ["the", "is", "sunny", "day"]
+// Explanation: "the", "is", "sunny" and "day" are the four most frequent words,
+//     with the number of occurrence being 4, 3, 2 and 1 respectively.
+
+// Create an object with counts
+// Sort based on count value 
+
+Time Complexity: o(n log(n))
+
+const topKFrequent = (words, k) => {
+  const wordCount = words.reduce((acc, word) => { 
+    acc[word] = acc[word] + 1 || 1
+    return acc
+  }, {})
+
+  let sorted = Object.keys(wordCount).sort((a, b) => {
+    if (wordCount[a] > wordCount[b]) return -1;
+    if (wordCount[a] < wordCount[b]) return 1;
+    if (wordCount[a] === wordCount[b]) {
+      return a < b ? -1 : 1
+    }
+  })
+
+  return sorted.slice(0, k)
+}
+
+
+topKFrequent( ["m", "love", "leetcode", "m", "love", "coding"], 2)
