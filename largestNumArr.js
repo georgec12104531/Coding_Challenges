@@ -12,10 +12,10 @@
 // compare the numbers
 // return arr.join('')
 
-const largestNum = (nums) => {
-  return nums.sort((a, b) => {
+const largestNumber = (nums) => {
+  let sorted = nums.sort((a, b) => {
     return `${b}${a}` - `${a}${b}`
   }).join("")
-}
 
-largestNum([3,30,34,5,9])
+  return sorted == 0 ? '0' : sorted;
+}
