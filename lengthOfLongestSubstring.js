@@ -113,3 +113,22 @@ function lengthOfLongestSubstring(s) {
 }
 
 lengthOfLongestSubstring('abcabcbb')
+
+
+
+// ----
+
+const lengthOfLongestSubstring = (str) => {
+  let targetObj = {}
+  let max = 0;
+  let left = 0;
+
+  for(let i = 0; i < str.length; i++) {
+    let current = str[i];
+    left = targetObj[current] >= left ? targetObj[current] + 1 : left;
+    targetObj[current] = i
+    max = Math.max(i - left + 1, max)
+  }
+
+  return max
+}
