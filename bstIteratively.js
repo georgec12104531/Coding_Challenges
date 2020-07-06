@@ -28,6 +28,33 @@ const bst = (arr, target) => {
   return false;
 }
 
-
-
 bst([1, 2,3, 4, 6, 7, 8, 9], 5)
+
+const searchInsert = (arr, target) => {
+  let length = arr.length
+  // Short-circuit
+  if (arr[0] === target) return 0;
+  if (arr[length - 1] === target) return length - 1
+  if (arr[0] > target) return 0
+  if (arr[length - 1] < target) return length;
+
+  let left = 0;
+  let right = length - 1;
+
+
+  while (left + 1 < right) {
+    let mid = Math.floor((right - left) / 2);
+    let guess = left + mid;
+
+    if (arr[guess] === target) {
+      return guess;
+    }
+
+    if (arr[guess] < target) left = guess
+    if (arr[guess] > target) right = guess
+  }
+
+  return right
+}
+
+bst([1, 3], 1)
