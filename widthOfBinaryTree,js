@@ -1,0 +1,68 @@
+
+      //     1
+      //    / \
+      //   3   2 
+      //  /        
+      // 5   
+
+
+function Node(val, left=null, right=null) {
+  this.val = val;
+  this.left = left;
+  this.right = right;
+}
+
+const five = new Node(5);
+const three = new Node(3, five);
+const two = new Node(2);
+const one = new Node(1, three, two)
+
+const widthOfBinaryTree = (root) => {
+  const dummyRoot = new Node(root.val, root.left, root.right);
+  let queue = [dummyRoot];
+  let maxWidth = -1;
+
+  while (queue.length) {
+    // Will replace queue
+    let nextQueue = [];
+    // Will use to get the max width
+    let currentVals = [];
+
+    queue.forEach((el) => {
+      currentVals.push(el);
+
+      if (!el) {
+        nextQueue.push(null)
+        nextQueue.push(null)
+      } else {
+        nextQueue.push(el.right);
+        nextQueue.push(el.left);
+      }
+    })
+
+    let currentWidth = getWidth(currentVals);
+    if (!currentWidth) break;
+
+    maxWidth = Math.max(maxWidth, currentWidth);
+    queue = nextQueue
+  }
+
+  return maxWidth
+};
+
+const getWidth = (arr) => {
+  let i = 0; 
+  let j = arr.length - 1;
+
+  while (i < j) {
+    if (arr[j] && arr[i]) break;
+    if (!arr[i]) i++;
+    if (!arr[j]) j--;
+  }
+
+  return j - i + 1
+}
+
+// getWidth([0, 0, 0, 0])
+
+widthOfBinaryTree(one)
