@@ -15,6 +15,19 @@ const reverseString = (s) => {
   return revArr
 }
 
+const reverse = (strArr) => {
+  let strArrCopy = strArr.slice();
+  let i = 0;
+  let j = strArrCopy.length - 1;
 
-console.log(reverseString(["h","e", "l", "l", "o"]))
+  while (i < j) {
+    [strArrCopy[i], strArrCopy[j]] = [strArrCopy[j], strArrCopy[i]]
+    
+    i++;
+    j--;
+  }
 
+  return strArrCopy;
+}
+
+reverse(['a', 'b', 'c', 'd', 'e', 'f', 'g'])
